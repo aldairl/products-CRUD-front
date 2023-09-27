@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title 
+            class="mdc-button"
+            [routerLink]="['/products/', product.id]"
+        >{{ product.name }}</mat-card-title>
+    </mat-card-header>
+
+    <img [src]="product | productImage" [alt]="product.name">
+
+    <mat-card-content class="mt-2">
+        <small>SKU: {{ product.sku }}</small>
+        <mat-chip-listbox>
+            <mat-chip>
+                <strong> $ {{product.price}} </strong>
+            </mat-chip>
+        </mat-chip-listbox>
+    </mat-card-content>
+
+
+</mat-card>

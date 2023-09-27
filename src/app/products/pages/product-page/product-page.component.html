@@ -1,1 +1,52 @@
-<p>product-page works!</p>
+<ng-template #loading>
+    <mat-grid-list cols="1">
+        <mat-grid-tile>
+            <mat-spinner></mat-spinner>
+        </mat-grid-tile>
+    </mat-grid-list>
+</ng-template>
+
+<button mat-button mat-raised class="m-2" (click)="goBack()">
+    <mat-icon>arrow_back_ios</mat-icon>
+</button>
+
+<section *ngIf="product; else loading" class="grid p-2">
+
+    <mat-card class="col-12 sm:col-6">
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <img [src]="product | productImage" [alt]="product.name">
+    </mat-card>
+
+    <mat-card class="col-12 sm:col-6">
+        <mat-card-title>Información del producto</mat-card-title>
+        <mat-card-subtitle>{{product.description}}</mat-card-subtitle>
+
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item>SKU: {{product.sku}}</mat-list-item>
+                <mat-list-item>PRECIO: $ {{product.price}}</mat-list-item>
+                <mat-list-item>STOCK: {{product.stock}}</mat-list-item>
+                <mat-list-item>
+                    <mat-chip class="mr-1" *ngFor="let tag of product.tags">
+                        {{tag}}
+                    </mat-chip>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-button mat-raised color="primary" [routerLink]="['/products/edit', product.id]">
+                <mat-icon>edit</mat-icon>
+                Editar
+            </button>
+    
+            <span class="spacer"></span>
+
+            <button mat-button mat-raised color="warn" (click)="deleteProduct(product.id)">
+                <mat-icon>delete</mat-icon>
+                Eliminar
+            </button>
+    
+        </mat-card-actions>
+    </mat-card>
+</section>
