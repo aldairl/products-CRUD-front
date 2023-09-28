@@ -3,6 +3,9 @@ import { ProductsService } from '../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Product } from '../../interfaces/product.inteface';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-page',
@@ -17,7 +20,9 @@ export class ProductPageComponent implements OnInit {
   constructor(
     private producstService: ProductsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar,
     ){}
 
   ngOnInit(): void {
@@ -37,6 +42,25 @@ export class ProductPageComponent implements OnInit {
   }
 
   deleteProduct(id:number){
-    console.log('delete', id)
+    if(!this.product?.id) return
+
+    const dialogRef = this.dialog.open( ConfirmDialogComponent, {
+      data: this.product
+    })
+
+    dialogRef.afterClosed().subscribe( response => {
+      if(!response) return
+
+      this.producstService.deleteProduct(id)
+      .subscribe( () => {
+        this.showSnackbar('Producto eliminado exitosamente!')
+        return this.router.navigate(['/products'])
+      })
+    })
+  }
+  showSnackbar(message: string):void{
+    this.snackbar.open(message, 'done', {
+      duration: 2000
+    } )
   }
 }

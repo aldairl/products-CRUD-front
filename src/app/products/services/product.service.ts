@@ -11,8 +11,8 @@ export class ProductsService {
 
     constructor(private http: HttpClient) { }
     
-    getProducts(): Observable<Product[]>{
-        return this.http.get<Product[]>(`${this.API_URL}/products`)
+    getProducts(page:number=1, limit: number=5, query:string=''): Observable<Product[]>{
+        return this.http.get<Product[]>(`${this.API_URL}/products?_page=${page}&_limit=${limit}&q=${query}`)
     }
 
     getProductById(id: string): Observable<Product|undefined>{

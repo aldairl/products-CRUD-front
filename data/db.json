@@ -173,19 +173,6 @@
       "stock": 7
     },
     {
-      "id": 15,
-      "name": "product 15",
-      "description": "description product 15",
-      "sku": "PROINV15",
-      "price": 114,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqKZaVzv8zORuXNKCvE2KLoWHLKlwV6S7eGA&usqp=CAU",
-      "tags": [
-        "Móvil",
-        "Cocina"
-      ],
-      "stock": 19
-    },
-    {
       "id": 16,
       "name": "product 16",
       "description": "description product 16",

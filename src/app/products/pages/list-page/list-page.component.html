@@ -1,9 +1,46 @@
-<h1>Listado de productos</h1>
+<section class="grid justify-content-between align-items-center">
+    
+    <h1 class="p-2">Listado de productos</h1>
+    <div>
+        <mat-form-field class="col-12 md:col-6" >
+        
+            <mat-label>Buscar Producto</mat-label>
+            <input type="text" matInput  [formControl] = "searchInput" (input)="getProducts()" [matAutocomplete]="auto" />
+    
+            <mat-autocomplete aitoActiveFirtsOption #auto="matAutocomplete" (optionSelected)="onSelectedOption( $event )">
+                <mat-option *ngFor="let product of products" [value]="product">
+                    {{product.name}}
+                </mat-option>
+                <mat-option value="" *ngIf="!products.length && searchInput.value">
+                    No se encontró coincidencias para {{ searchInput.value }}
+                </mat-option>
+            </mat-autocomplete>
+    
+        </mat-form-field>
+
+        <button mat-button mat-raised (click)="prevPage()">
+            <mat-icon>skip_previous</mat-icon>
+        </button>
+
+        Página {{page}}
+
+        <button mat-button mat-raised (click)="nextPage()">
+            <mat-icon>skip_next</mat-icon>
+        </button>
+
+    </div>
+
+</section>
+
 <mat-divider></mat-divider>
 
 <section class="grid bm-8 pt-2">
 
-    <div *ngFor="let product of products" class="col-12 sm:col:4 md:col-3 xl:col-2" >
+    <div class="m-3" *ngIf="!products.length">
+        <h3>No existen más productos</h3>
+    </div>
+
+    <div *ngFor="let product of products" class="col-12 sm:col-4 md:col-3 xl:col-2" >
 
         <product-card [product]="product"></product-card>
 
