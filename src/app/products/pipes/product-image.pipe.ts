@@ -6,8 +6,8 @@ import { Product } from '../interfaces/product.inteface';
 })
 export class ProductImagePipe implements PipeTransform {
 
-  transform(product: Product): string {
-    if( !product.image ) return 'assets/images/no-product.png'
+  transform(product: Product | undefined): string {
+    if( ! product || !product.image ) return 'assets/images/no-product.png'
     return product.image
   }
 

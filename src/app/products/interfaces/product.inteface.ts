@@ -5,6 +5,11 @@ export interface Product {
     sku:         string;
     price:       number;
     image:       string;
-    tags:        string[];
+    tags:        Tag[];
     stock:       number;
+}
+
+export interface Tag{
+    id: number;
+    name: string;
 }

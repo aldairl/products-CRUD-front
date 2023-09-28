@@ -1,1 +1,19 @@
-<p>search-page works!</p>
+<section class="felx flex-column p-2">
+    <h3>Buscador</h3>
+
+    <mat-form-field>
+
+        <mat-label>Buscar Producto</mat-label>
+        <input type="text" matInput  [formControl] = "searchInput" (input)="searchProduct()" [matAutocomplete]="auto" />
+
+        <mat-autocomplete aitoActiveFirtsOption #auto="matAutocomplete" (optionSelected)="onSelectedOption( $event )">
+            <mat-option *ngFor="let product of products" [value]="product">
+                {{product.name}}
+            </mat-option>
+            <mat-option value="" *ngIf="!products.length && searchInput.value">
+                No se encontró coincidencias para {{ searchInput.value }}
+            </mat-option>
+        </mat-autocomplete>
+
+    </mat-form-field>
+</section>

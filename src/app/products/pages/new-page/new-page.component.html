@@ -1,1 +1,83 @@
-<p>new-page works!</p>
+<h1>
+    {{ currentProduct.id ? 'Editar' : "Agregar" }}
+    Producto
+</h1>
+
+<mat-divider></mat-divider>
+
+<section class="grid">
+    <article class="col-12 sm:col-6">
+        <mat-card>
+            <mat-card-content>
+                <form class="grid" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>
+                            Nombre
+                        </mat-label>
+                        <input matInput type="text" required="" formControlName="name">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>
+                            SKU
+                        </mat-label>
+                        <input matInput type="text" required="" formControlName="sku">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>
+                            Descripción
+                        </mat-label>
+                        <input matInput type="text" required="" formControlName="description">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>
+                            Precio
+                        </mat-label>
+                        <input matInput type="number" required="" formControlName="price">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>
+                            Stock
+                        </mat-label>
+                        <input matInput type="number" required="" formControlName="stock">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>
+                            image
+                        </mat-label>
+                        <input matInput type="text" required="" formControlName="image">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>
+                            Tags
+                        </mat-label>
+                        <mat-select required="" formControlName="tags" multiple>
+                            <mat-option *ngFor="let tag of tags" [value]="tag.name">
+                                {{tag.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </form>
+
+                <div class="flex justify-content-between">
+                    <button *ngIf="currentProduct.id" mat-flat-button color="warn" (click)="onDeleteProduct()" >Borrar</button>
+                    <button mat-flat-button color="primary" (click)="onSubmit()">Guardar</button>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+    </article>
+
+    <article class="col-12 sm:col-6">
+        <mat-card>
+            <img [src]="currentProduct | productImage" alt="Iamgen del producto" srcset="">
+        </mat-card>
+    </article>
+</section>
