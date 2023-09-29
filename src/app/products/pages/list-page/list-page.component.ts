@@ -13,41 +13,47 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 export class ListPageComponent implements OnInit {
 
   public products: Product[] = []
+  public totalPages: number = 0
   public page: number = 1
   public limit: number = 5
   public searchInput = new FormControl('')
 
-  constructor( private productsService: ProductsService ){}
+  constructor(private productsService: ProductsService) { }
 
 
   ngOnInit(): void {
     this.getProducts()
   }
 
-  getProducts(){
-    const query:string = this.searchInput.value || ''
+  getProducts() {
+    const query: string = this.searchInput.value || ''
 
     this.productsService.getProducts(this.page, this.limit, query)
-    .subscribe( products => this.products = products )
+      .subscribe(({ products, totalPages }) => {
+        this.products = products
+        this.totalPages = totalPages
+      })
   }
 
-  nextPage(){
-    this.page += 1
-    this.getProducts()
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page += 1
+      this.getProducts()
+    }
   }
 
-  prevPage(){
-    if(this.page > 1){
+  prevPage() {
+    if (this.page > 1) {
       this.page -= 1
       this.getProducts()
     }
   }
 
-  onSelectedOption(event: MatAutocompleteSelectedEvent): void{
+  onSelectedOption(event: MatAutocompleteSelectedEvent): void {
     const { option } = event
     const selectedProduct: Product = option.value
 
-    if(!selectedProduct){
+    if (!selectedProduct) {
       return
     }
 

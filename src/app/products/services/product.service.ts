@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
-import { Product, Tag } from '../interfaces/product.inteface';
+import { Product, ResponseProduct, Tag } from '../interfaces/product.inteface';
 import { environments } from 'src/environments/environments';
 
 @Injectable({providedIn: 'root'})
@@ -11,8 +11,8 @@ export class ProductsService {
 
     constructor(private http: HttpClient) { }
     
-    getProducts(page:number=1, limit: number=5, query:string=''): Observable<Product[]>{
-        return this.http.get<Product[]>(`${this.API_URL}/products?_page=${page}&_limit=${limit}&q=${query}`)
+    getProducts(page:number=1, limit: number=5, query:string=''): Observable<ResponseProduct>{
+        return this.http.get<ResponseProduct>(`${this.API_URL}/products?_page=${page}&_limit=${limit}&q=${query}`)
     }
 
     getProductById(id: string): Observable<Product|undefined>{

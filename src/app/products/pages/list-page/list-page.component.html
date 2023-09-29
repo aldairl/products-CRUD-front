@@ -1,7 +1,7 @@
 <section class="grid justify-content-between align-items-center">
     
     <h1 class="p-2">Listado de productos</h1>
-    <div>
+    <div class="grid align-items-center">
         <mat-form-field class="col-12 md:col-6" >
         
             <mat-label>Buscar Producto</mat-label>
@@ -18,15 +18,18 @@
     
         </mat-form-field>
 
-        <button mat-button mat-raised (click)="prevPage()">
-            <mat-icon>skip_previous</mat-icon>
-        </button>
-
-        Página {{page}}
-
-        <button mat-button mat-raised (click)="nextPage()">
-            <mat-icon>skip_next</mat-icon>
-        </button>
+        <div>
+            <button mat-button mat-raised (click)="prevPage()">
+                <mat-icon>skip_previous</mat-icon>
+            </button>
+            <small>
+                Página {{page}} / {{totalPages}}
+            </small>
+    
+            <button mat-button mat-raised (click)="nextPage()">
+                <mat-icon>skip_next</mat-icon>
+            </button>
+        </div>
 
     </div>
 

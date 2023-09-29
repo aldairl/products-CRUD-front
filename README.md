@@ -8,9 +8,10 @@ This app contains a CRUD of products
 npm install
 ```
 
-## Run local backend
+## Config backend API
 
-```npm run local-back```
+Set the api url in environment
+API_URL: your api
 
 ## Development server
 
